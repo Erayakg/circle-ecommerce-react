@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Category from '../components/Category';
 import ProductList from '../pages/ProductListPage';
+import Cart from '../pages/Cart';
 
 export default class Homepage extends Component {
   state = {
-    selectedCategory: ''
+    selectedCategory: '',
   };
 
   handleCategorySelect = (category) => {
     this.setState({ selectedCategory: category });
   };
+
 
   render() {
     return (
@@ -18,7 +20,10 @@ export default class Homepage extends Component {
           <Category onCategorySelect={this.handleCategorySelect} />
         </div>
         <div className="w-full lg:w-3/4 p-4">
-          <ProductList selectedCategory={this.state.selectedCategory} />
+          <ProductList
+            selectedCategory={this.state.selectedCategory}
+            onAddToCart={this.handleAddToCart}
+          />
         </div>
       </div>
     );
