@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from './pages/LoginPage';
 import Cart from './pages/Cart';
 import ProfilPage from './pages/ProfilPage';
+import RegisterPage from './pages/RegisterPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,8 +18,8 @@ root.render(
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/cart" element={<Cart />} />
-        < Route path='/profilPage' element={<ProfilPage/>}/>
+        <Route path='/profilPage' element={<ProfilPage/>}/>
+        <Route path='/registerPage' element={<RegisterPage/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
