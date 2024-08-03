@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -17,8 +17,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetch('https://fakestoreapi.com/auth/login', {
+    fetch('http://localhost:8080/v1/auth/login', {
       method: 'POST',
       body: JSON.stringify({
         username: email,
@@ -28,20 +27,22 @@ const LoginPage = () => {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => res.json())
-      .then(json => {
-        if (json.token) {
-          localStorage.setItem('token', json.token);
-          console.log('Token saved:', json.token);
+      .then(res => res.text()) // Yanıtı metin olarak al
+      .then(token => {
+        if (token) {
+          console.log('Token received:', token);
+          localStorage.setItem('token', token);
+          console.log('Token saved:', token);
           navigate('/'); 
+          window.location.reload()
         } else {
-          console.error('Login failed:', json);
-
+          console.error('Login failed, no token received.');
         }
       })
       .catch(err => console.error('Error:', err));
-  };
-
+    
+    }
+    
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
