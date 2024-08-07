@@ -1,31 +1,26 @@
-import React, { Component } from 'react';
-import Category from '../components/Category';
+import React, { useState } from 'react'
+import Navbar from '../components/Navbar'
 import ProductList from '../pages/ProductListPage';
-import Cart from '../pages/Cart';
+import Cart from './Cart';
 
-export default class Homepage extends Component {
-  state = {
-    selectedCategory: '',
-  };
+function Homepage() {
 
-  handleCategorySelect = (category) => {
-    this.setState({ selectedCategory: category });
-  };
+  const [selectedCategory,setSelectedCategory]=useState(null);
 
 
-  render() {
-    return (
+  return (
+    <div>            
+        <Navbar setSelectedCategory={setSelectedCategory}  />
       <div className="container mx-auto flex flex-col lg:flex-row">
-        <div className="w-full lg:w-1/4 p-4">
-          <Category onCategorySelect={this.handleCategorySelect} />
-        </div>
-        <div className="w-full lg:w-3/4 p-4">
+
+        <div className="w-full  p-4">
           <ProductList
-            selectedCategory={this.state.selectedCategory}
-            onAddToCart={this.handleAddToCart}
+            selectedCategory={selectedCategory}
           />
         </div>
       </div>
-    );
-  }
+      </div>
+  )
 }
+
+export default Homepage
