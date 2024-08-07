@@ -1,24 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import DropdownMenu from './DropdownMenu';
 
 const navigation = [
   { name: 'Anasayfa', href: '/', current: true },
   { name: 'Sepet', href: '/', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Category', href: '#', current: false },
 ];
+
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
+
 
 function logout() {
   localStorage.clear();
   window.location.href = '/login'; // Redirect to login after logout
 }
 
-export default function Example() {
+
+export default function Example(props) {
+  
   const [user, setUser] = useState(null);
+  const {setSelectedCategory }= props;
 
   useEffect(() => {
     const storedUser = localStorage.getItem('token');
@@ -62,6 +69,9 @@ export default function Example() {
                     {item.name}
                   </a>
                 ))}
+                <a>
+                  <DropdownMenu setSelectedCategory={setSelectedCategory} />
+                </a>
               </div>
             </div>
           </div>
